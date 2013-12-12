@@ -4,7 +4,7 @@ public class Arena {
 	int player2WinCount = 0;
 	
 	public void run () {
-		SwingGUI gui = new SwingGUI();
+		SwingGUI gui = new SwingGUI(0);
 		
 		//Welcomes the player to the game.
 		gui.welcomeMessage();
@@ -26,12 +26,15 @@ public class Arena {
 				amountOfGames = gui.askForInt("How many games do you want the computers to run?", 1);
 			}
 			
-			int userInputBoardSizeRows = gui.askForInt("How many rows should the board have?", 7);
-			int userInputBoardSizeColumns = gui.askForInt("How many columns should the board have?", 6);
+			int userInputBoardSizeRows = gui.askForInt("How many rows should the board have?", 6);
+			int userInputBoardSizeColumns = gui.askForInt("How many columns should the board have?", 7);
 			
-			//TODO Merge with game class.
-
+			Player playerOne = new Player(PlayerType.USER, Chips.RED, userInputBoardSizeRows, userInputBoardSizeColumns);
+			Player playerTwo = new Player(PlayerType.USER, Chips.BLACK, userInputBoardSizeRows, userInputBoardSizeColumns);
+			Game play = new Game(playerOne, playerTwo, userInputBoardSizeRows, userInputBoardSizeColumns);
+			String winner = String.valueOf(play.play());
 			
+			gui.printWinner(winner);
 			
 		} while (gui.playAgain());
 		
