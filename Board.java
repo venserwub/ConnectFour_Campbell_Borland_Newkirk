@@ -80,20 +80,20 @@ public class Board {
 	}
 	
 	public boolean diagonalDown(){
-		int [] [] board = { {1, 1, 1, 1, 2, 1, 2},
-							{2, 2, 2, 1, 1, 2, 1},
-							{1, 2, 1, 2, 2, 2, 1},
-							{1, 1, 1, 1, 1, 1, 1},
-							{2, 2, 2, 2, 2, 2, 2} };
+//		int [] [] board = { {1, 1, 1, 1, 2, 1, 2},
+//							{2, 2, 2, 1, 1, 2, 1},
+//							{1, 2, 1, 2, 2, 2, 1},
+//							{1, 1, 1, 1, 1, 1, 1},
+//							{2, 2, 2, 2, 2, 2, 2} };
 		boolean win = false;
 		int col = 0;
 		int chipCount = 1;
-		int lastColor = 0;
+		Chips lastColor = null;
 		for(int rowStart = 0; rowStart < board.length; rowStart++){
 			for(int row = rowStart; row < board.length; row++){
 				lastColor = board[row][col];
 				if (row < board.length - 1 && col < board[row].length -1){
-					if(board[row + 1][col + 1] == lastColor){
+					if(board[row + 1][col + 1] == lastColor && (lastColor == Chips.RED || lastColor == Chips.BLACK)){
 						chipCount++;
 						if(chipCount >= chipsToWin){
 							win = true;
@@ -118,7 +118,6 @@ public class Board {
 					
 					lastColor = board[row][column];
 					if (row < board.length - 1 && column < board[row].length - 1){
-						int c = board[row + 1][column + 1];
 						if(board[row + 1][column + 1] == lastColor){
 							chipCount++;
 							if(chipCount >= chipsToWin){
@@ -143,19 +142,19 @@ public class Board {
 	}
 	
 	public boolean diagonalUp(){
-		int [] [] board = { {1, 1, 1, 2, 2, 1, 2},
-							{2, 2, 2, 1, 1, 2, 2},
-							{1, 2, 1, 2, 2, 2, 1},
-							{1, 1, 1, 1, 2, 1, 1},
-							{2, 2, 2, 2, 2, 2, 2} };
+//		int [] [] board = { {1, 1, 1, 2, 2, 1, 2},
+//							{2, 2, 2, 1, 1, 2, 2},
+//							{1, 2, 1, 2, 2, 2, 1},
+//							{1, 1, 1, 1, 2, 1, 1},
+//							{2, 2, 2, 2, 2, 2, 2} };
 		int col = 0;
 		int chipCount = 1;
-		int lastColor = 0;
+		Chips lastColor = null;
 		for(int rowStart = board.length - 1; rowStart >= 0; rowStart--){
 			for(int row = rowStart; row >= 0; row--){
 				lastColor = board[row][col];
 				if (row > 0 && col < board[row].length -1){
-					if(board[row - 1][col + 1] == lastColor){
+					if(board[row - 1][col + 1] == lastColor && (lastColor == Chips.RED || lastColor == Chips.BLACK)){
 						chipCount++;
 						if(chipCount >= chipsToWin){
 							return true;
@@ -178,7 +177,6 @@ public class Board {
 					
 					lastColor = board[row][column];
 					if (row > 0 && column < board[row].length - 1){
-						int c = board[row - 1][column + 1];
 						if(board[row - 1][column + 1] == lastColor){
 							chipCount++;
 							if(chipCount >= chipsToWin){
